@@ -1,5 +1,5 @@
 {
-  "name": "ii-social",
+  "name": "ii-socialize",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.0.2",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "eslint-config-next": "^15.0.0-rc.1",
     "next": "^15.0.2-canary.8",
