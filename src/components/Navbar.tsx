@@ -15,7 +15,13 @@ const Navbar = () => {
       {/* Left */}
       <div className="md:hidden lg:block w-[20%]">
         <Link href="/" className="font-bold text-xl text-blue-600">
-          ii-socialize
+          <Image
+            src="/logo.png"
+            alt="Homepage"
+            width={48}
+            height={48}
+            className="w-12 h-12"
+          />
         </Link>
       </div>
       {/* Center */}

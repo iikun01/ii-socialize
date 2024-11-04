@@ -7,8 +7,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lama Dev Social Media App",
-  description: "Social media app built with Next.js",
+  title: "II-Socialize",
+  description: "Social media app built with Next.js + MySQL",
 };
 
 export default function RootLayout({
