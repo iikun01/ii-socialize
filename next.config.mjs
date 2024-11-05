@@ -2,7 +2,15 @@
 const nextConfig = {
   experimental: {
     reactCompiler: true,
-    // ppr: 'incremental' -- disabled for Production in Vercel
+    // ppr: "incremental", -- disabled this for Production. updated this for deployment.
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
   },
 };
 
