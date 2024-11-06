@@ -3,18 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.0.2",
+    "@prisma/client": "^5.21.1",
+    "@vercel/postgres": "^0.10.0",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
     "eslint-config-next": "^15.0.2",
     "next": "^15.0.0-rc.0",
+    "prisma": "^5.21.1",
     "react": "^19.0.0-rc-cae764ce-20241025",
-    "react-dom": "^19.0.0-rc-cae764ce-20241025"
+    "react-dom": "^19.0.0-rc-cae764ce-20241025",
+    "svix": "^1.37.0"
   },
   "devDependencies": {
     "@types/node": "^22.8.1",
