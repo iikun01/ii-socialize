@@ -1,6 +1,7 @@
-"use server"
+"use server";
 
 import { auth } from "@clerk/nextjs/server";
+import { z } from "zod";
 import prisma from "./client";
 
 export const switchFollow = async (userId: string) => {
@@ -29,7 +30,7 @@ export const switchFollow = async (userId: string) => {
         where: {
           senderId: currentUserId,
           receiverId: userId,
-        }
+        },
       });
 
       if (existingFollowRequest) {
@@ -51,10 +52,10 @@ export const switchFollow = async (userId: string) => {
     console.log(error);
     throw new Error("Something went wrong!");
   }
-}
+};
 
 export const switchBlock = async (userId: string) => {
-  const {userId: currentUserId} = await auth();
+  const { userId: currentUserId } = await auth();
 
   if (!currentUserId) {
     throw new Error("You must be logged in!");
@@ -85,7 +86,7 @@ export const switchBlock = async (userId: string) => {
     console.log(error);
     throw new Error("Something went wrong!");
   }
-}
+};
 
 export const acceptFollowRequest = async (senderUserId: string) => {
   const { userId: currentUserId } = await auth();
@@ -134,7 +135,7 @@ export const acceptFollowRequest = async (senderUserId: string) => {
 };
 
 export const declineFollowRequest = async (userId: string) => {
-  const {userId: currentUserId} = await auth();
+  const { userId: currentUserId } = await auth();
 
   if (!currentUserId) {
     throw new Error("You must be logged in!");
@@ -158,5 +159,54 @@ export const declineFollowRequest = async (userId: string) => {
   } catch (error) {
     console.log(error);
     throw new Error("Something went wrong!");
+  }
+};
+
+export const updateProfile = async (
+  prevState: { success: boolean; error: boolean },
+  payload: { formData: FormData; cover: string }
+) => {
+  // get current logged in user
+  const { userId: currentUserId } = await auth();
+
+  if (!currentUserId) {
+    return { success: false, error: true };
+  }
+
+  const { formData, cover } = payload;
+  const fields = Object.fromEntries(formData);
+  const filteredFields = Object.fromEntries(
+    Object.entries(fields).filter(([_, value]) => value !== "")
+  );
+
+  const Profile = z.object({
+    cover: z.string().optional(),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    description: z.string().max(255).optional(),
+    city: z.string().optional(),
+    school: z.string().optional(),
+    work: z.string().optional(),
+    website: z.string().optional(),
+  });
+
+  const validatedFields = Profile.safeParse({ cover, ...filteredFields });
+
+  if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors);
+    return { success: false, error: true };
+  }
+
+  try {
+    await prisma.user.update({
+      where: {
+        id: currentUserId,
+      },
+      data: validatedFields.data,
+    });
+    return { success: true, error: false };
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: true };
   }
 };

@@ -11,8 +11,6 @@ const ProfilePage = async ({ params }: { params: { username: string } }) => {
 
   const follower = await prisma.follower.findMany();
 
-  console.log("Follower ", follower);
-
   const user = await prisma.user.findUnique({
     where: { username },
     select: {
