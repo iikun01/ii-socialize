@@ -7,9 +7,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 const ProfilePage = async ({ params }: { params: { username: string } }) => {
-  const { username } = await params;
-
-  const follower = await prisma.follower.findMany();
+  const { username } = params;
 
   const user = await prisma.user.findUnique({
     where: { username },
