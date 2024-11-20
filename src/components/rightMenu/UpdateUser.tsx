@@ -6,6 +6,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
+import UpdateButton from "./UpdateButton";
 
 const UpdateUser = ({ user }: { user: User }) => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const UpdateUser = ({ user }: { user: User }) => {
   const handleClose = () => {
     setIsOpen(false);
     state.success && router.refresh();
+    state.success = false;
+    state.error = false;
   };
 
   return (
@@ -167,9 +170,7 @@ const UpdateUser = ({ user }: { user: User }) => {
                 />
               </div>
             </div>
-            <button className="bg-blue-500 hover:bg-blue-600 p-2 mt-2 rounded-md text-white">
-              Update
-            </button>
+            <UpdateButton />
             {state.success && (
               <div className="text-green-500 text-xs">Profile updated!</div>
             )}

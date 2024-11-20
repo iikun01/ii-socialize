@@ -27,36 +27,33 @@ const Navbar = () => {
       {/* Center */}
       <div className="hidden md:flex w-[50%] text-sm items-center justify-between">
         {/* Links */}
-        <div className="flex gap-6 text-gray-600">
-          <Link href="/" className="flex items-center gap-2">
+        <div className="flex gap-20 text-gray-600">
+          <Link href="/" className="flex items-center gap-6">
             <Image
               src="/home.png"
               alt="Homepage"
-              width={16}
-              height={16}
-              className="w-4 h-4"
+              width={24}
+              height={24}
+              className="w-6 h-6"
             />
-            <span>Homepage</span>
           </Link>
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-6">
             <Image
               src="/friends.png"
-              alt="Homepage"
-              width={16}
-              height={16}
-              className="w-4 h-4"
+              alt="Friends"
+              width={24}
+              height={24}
+              className="w-6 h-6"
             />
-            <span>Friends</span>
           </Link>
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-6">
             <Image
               src="/stories.png"
-              alt="Homepage"
-              width={16}
-              height={16}
-              className="w-4 h-4"
+              alt="Stories"
+              width={24}
+              height={24}
+              className="w-6 h-6"
             />
-            <span>Stories</span>
           </Link>
         </div>
         <div className="hidden xl:flex p-2 bg-slate-100 items-center rounded-xl">
@@ -78,9 +75,6 @@ const Navbar = () => {
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>
-            <div className="cursor-pointer">
-              <Image src="/people.png" alt="Profile" width={24} height={24} />
-            </div>
             <div className="cursor-pointer">
               <Image src="/messages.png" alt="Inbox" width={20} height={20} />
             </div>

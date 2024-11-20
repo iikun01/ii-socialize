@@ -174,7 +174,7 @@ export const updateProfile = async (
   }
 
   const { formData, cover } = payload;
-  const fields = Object.fromEntries(formData);
+  const fields = { cover, ...Object.fromEntries(formData) };
   const filteredFields = Object.fromEntries(
     Object.entries(fields).filter(([_, value]) => value !== "")
   );
@@ -190,7 +190,7 @@ export const updateProfile = async (
     website: z.string().optional(),
   });
 
-  const validatedFields = Profile.safeParse({ cover, ...filteredFields });
+  const validatedFields = Profile.safeParse(filteredFields);
 
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
@@ -210,3 +210,36 @@ export const updateProfile = async (
     return { success: false, error: true };
   }
 };
+
+export const switchLike = async (postId: number) => {
+  const {userId} = await auth();
+
+  if (!userId) throw new Error("User is not authenticate!");
+
+  try {
+    const existingLike = await prisma.like.findFirst({
+      where: {
+        userId,
+        postId,
+      },
+    });
+
+    if (existingLike) {
+      await prisma.like.delete({
+        where: {
+          id: existingLike.id,
+        },
+      });
+    } else {
+      await prisma.like.create({
+        data: {
+          userId,
+          postId,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong!");
+  }
+}
