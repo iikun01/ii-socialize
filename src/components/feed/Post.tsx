@@ -27,16 +27,16 @@ const Post = async ({ post }: { post: PostType }) => {
         </div>
         {/* Description */}
         <div className="flex flex-col gap-4">
-          <div className="w-full min-h-96 mt-2 relative">
-            {post?.image && (
+          {post?.image && (
+            <div className="w-full min-h-96 mt-2 relative">
               <Image
                 src={post?.image}
                 alt=""
                 fill
                 className="object-cover rounded-md"
               />
-            )}
-          </div>
+            </div>
+          )}
           <p>{post?.description}</p>
         </div>
         {/* Interaction */}

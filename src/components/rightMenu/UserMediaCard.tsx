@@ -36,7 +36,7 @@ const UserMediaCard = async ({ user }: { user: User }) => {
                   src={post.image!}
                   alt=""
                   fill
-                  className="object-cover rounded-md cursor-pointer"
+                  className={`object-cover rounded-md cursor-pointer ${!post.image ? "bg-slate-200" : ''}`}
                 />
               </div>
             ))
