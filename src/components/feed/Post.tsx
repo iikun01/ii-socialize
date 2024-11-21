@@ -8,9 +8,8 @@ type PostType = AllPosts & { user: User } & { likes: { userId: string }[] } & {
 };
 
 const Post = async ({ post }: { post: PostType }) => {
-  console.log("Post ", post);
   return (
-    <div className="flex flex-col gap-4">
+    <div className="p-4 bg-white shadow-md rounded-lg flex flex-col gap-4">
       {/* User */}
       <div key={post.id}>
         <div className="flex items-center justify-between">
@@ -46,7 +45,7 @@ const Post = async ({ post }: { post: PostType }) => {
           likes={post.likes.map((like) => like.userId)}
           commentNumber={post._count.comments}
         />
-        <Comments />
+        <Comments postId={post.id} />
       </div>
     </div>
   );
