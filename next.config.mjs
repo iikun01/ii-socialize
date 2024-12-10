@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    reactCompiler: true,
+    reactCompiler: true, // update this
     // ppr: "incremental", -- disabled this for Production. updated this for deployment.
   },
   images: {
